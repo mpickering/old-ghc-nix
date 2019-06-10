@@ -33,6 +33,11 @@ let
         name = "bindist-version";
         src = bindistTarball;
         nativeBuildInputs = [ gcc perl ];
+        postUnpack = ''
+          patchShebangs ghc*/utils/
+          patchShebangs ghc*/configure
+          sed -i 's@utils/ghc-pwd/dist-install/build/tmp/ghc-pwd-bindist@pwd@g' ghc*/configure
+        '';
         buildPhase = ''
           make show VALUE=ProjectVersion > version
         '';

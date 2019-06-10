@@ -17,8 +17,7 @@ A function is provided so you can use your own bindist if you want.
 nur.repos.mpickering.ghc.mkGhc {  url = "https://gitlab-artifact-url.com"; hash = "sha256"; }
 ```
 
-Note that currently none of the artifacts produced by gitlab are suitable to
-use with this as the script assumes the bindist has been built for deb8.
+You should use a bindist which has been produced using the deb8 builder.
 
 ## Adding a new release
 

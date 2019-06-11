@@ -17,7 +17,13 @@ A function is provided so you can use your own bindist if you want.
 nur.repos.mpickering.ghc.mkGhc {  url = "https://gitlab-artifact-url.com"; hash = "sha256"; }
 ```
 
-You should use a bindist which has been produced using the deb8 builder.
+The default assumes `ncurses5`, if the platform uses `ncurses6`, for example,
+`fedora27` then set the `ncursesVersion` attribute as well.
+
+```
+nur.repos.mpickering.ghc.mkGhc {  url = "https://gitlab-artifact-url.com"; hash = "sha256"; ncursesVersion = "6"; }
+```
+
 
 ## Adding a new release
 

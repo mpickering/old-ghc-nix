@@ -12,16 +12,17 @@ where nix is used to provide ghc and cabal but not to manage haskell dependencie
 ## Using your own bindist
 
 A function is provided so you can use your own bindist if you want.
+The best ones to use from gitlab are the `fedora27` artifacts.
 
 ```
 nur.repos.mpickering.ghc.mkGhc {  url = "https://gitlab-artifact-url.com"; hash = "sha256"; }
 ```
 
-The default assumes `ncurses5`, if the platform uses `ncurses6`, for example,
-`fedora27` then set the `ncursesVersion` attribute as well.
+The default assumes `ncurses6`, if the platform uses `ncurses5`, for example,
+`deb8` then set the `ncursesVersion` attribute as well.
 
 ```
-nur.repos.mpickering.ghc.mkGhc {  url = "https://gitlab-artifact-url.com"; hash = "sha256"; ncursesVersion = "6"; }
+nur.repos.mpickering.ghc.mkGhc {  url = "https://gitlab-artifact-url.com"; hash = "sha256"; ncursesVersion = "5"; }
 ```
 
 

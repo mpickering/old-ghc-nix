@@ -14,4 +14,4 @@ jobs:
         - nix-env -iA cachix -f https://cachix.org/api/v1/install
         - cachix use mpickering
         - cachix push mpickering --watch-store&
-        - nix-build
+        - nix-build --arg pkgs "import <nixpkgs> {}"

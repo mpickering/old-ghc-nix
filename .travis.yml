@@ -4,14 +4,12 @@ language: nix
 nix: 2.2.1
 env:
   global:
-    # cachix
-    - secure: "CC1UVHRWVQzEG7+YROJYEL/Idffp7yYGP8SoHSuEekCZHN3BIhUUXSXo7EpNgY3jER11BrUcd5Ie33Pm5Xe4SZMUHQ4pYxf8ibqbKKHumsnle0QEx8NhPjLrXjHbmuZ7jWIv+CpFklNiRLAD1q+CdQfjIE2EaDPohMaABH56fVy8qBJDSK34YGof7G+EZ/SjLgkpc5Z1YqzMZFmKFm9L4MrAjv3XH+/WJEXO8F3GEYN5nV70DCz8GLIUaTFHIRQUFghBxkot0wIdRyE0vIRLdIftML0DKjbkxbBK9Rv8OQZQLCRZb33VWQ1W1HeI6BwtSbSV1thqSJwFfWXDhQ0JA0yO1113LdMLk6ZYBwutsdeCkcI13mqXLknH65FhkZ4StR+6P9QWMHmIc4/ftdOcKplJNY257WGbsQX1QrcL3lnITsCO0VSUwDaTU4NBuSmzNuFf2FJKy1FjqSeKXkR9sxVeANgw0SL8Y2oXuFUMfZgteVJRnevxnKLamZlaCLkJ6Ty0B7uh1sQsveyMNVgevOBNWFP1T28/zbvF5+dMxJXgX48Y6HmIEE3IJ14JHIPWlbB296RlWVn4Thq2Z2E1uBIFIGZ3q8O6JDbpZb3Hathxfi84Gn+1DKddbpf11fknsmVE2ImPfme9K0URYy8cV/xRX3/pivl2kWH0xq4VEo0="
-
+    - secure: "cYlon30p3ftLJO3YF59Lf9yA8FVhxbglPFUXjQD864GPZlIhfQXn7VMugMZWDEqQti3BB5NAnXoZjRjBQhK13lYvR57bpkM78zdP4pfjrno58eOOdW8D+joC8uhq34RoStH5cv62bHm5SqkJyle5SNp0gV1CdJZ8y2fu25xnv/PjF9cx7K+vpvEaMpGzAwzArvc0E0UJ9bK4SNeRGSnDqLEiG3JH9ohvbvR+/xFHg5GibuG+3GP2rgdgTaXVGzMvr8PxkP2TnoOtGTaTqo5gV9p6g6rTS8tuD+4/3tIqtqoo4t/bLgdI9Og4K4uB7hLXxxzGu2MTL98pvpNgr+lWA5JHBBQ2oBk178MFGFqU7JqYKd4elvlTPxLmk/nCjoadqaLe25CfhfD2Q9I4UAksQGy6jqagytpRwz70mtNtr86RWFYTYDZk7AcPXqzWGHOcxi9ScgL1qdUp30nfIJG0sYomC6tnis2RkXQ9lEsymo17t5XkjJ4mJcgDehymtw1/7X8jzoMbFB/rxc9NBWkt0iPTUpucgn1tYx3bgznt7mco8qooBNOZ1FOqciB2X/qp819uniiW+XCe+WrcUoN8KGpNAozDK5Jo8H8LaiBZPYCyYLRPFrQ/NCfIRbNvmUIv9Ouyl7alM7rdeDDCgafga5PPlh6SIbw2ks7zr41ZIs4="
 jobs:
   include:
-    - stage: build library
-      script:
-        - nix-env -iA cachix -f https://cachix.org/api/v1/install
-        - cachix use mpickering
-        - cachix push mpickering --watch-store&
-        - nix-build --arg pkgs "import <nixpkgs> {}"
+  - stage: build library
+    script:
+    - nix-env -iA cachix -f https://cachix.org/api/v1/install
+    - cachix use mpickering
+    - cachix push mpickering --watch-store&
+    - nix-build --arg pkgs "import <nixpkgs> {}"

@@ -22,14 +22,14 @@ A function is provided so you can use your own bindist if you want.
 The best ones to use from gitlab are the `fedora27` artifacts.
 
 ```
-nur.repos.mpickering.ghc.mkGhc {  url = "https://gitlab-artifact-url.com"; hash = "sha256"; }
+nur.repos.mpickering.ghc.mkGhc { src.x86_64-linux = { url = "https://gitlab-artifact-url.com"; sha256 = "<sha256>"; }; }
 ```
 
 The default assumes `ncurses6`, if the platform uses `ncurses5`, for example,
 `deb8` then set the `ncursesVersion` attribute as well.
 
 ```
-nur.repos.mpickering.ghc.mkGhc {  url = "https://gitlab-artifact-url.com"; hash = "sha256"; ncursesVersion = "5"; }
+nur.repos.mpickering.ghc.mkGhc { src.x86_64-linux = { url = "https://gitlab-artifact-url.com"; sha256 = "<sha256>"; }; ncursesVersion = "5"; }
 ```
 
 

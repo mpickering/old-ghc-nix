@@ -59,6 +59,7 @@ stdenv.mkDerivation rec {
   src = bindistTarballs.${stdenv.targetPlatform.system};
 
   nativeBuildInputs = [ perl elfutils ];
+  propagatedBuildInputs = [ stdenv.cc ];
   buildInputs = stdenv.lib.optionals (stdenv.targetPlatform.isAarch32 || stdenv.targetPlatform.isAarch64) [ llvm_39 elfutils ]
                 ++ [ gmp ];
 

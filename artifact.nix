@@ -1,7 +1,7 @@
 { stdenv, lib, patchelfUnstable
 , perl, gcc, llvm_39
 , ncurses6, ncurses5, gmp, glibc, libiconv
-}: { bindistTarball, ncursesVersion }:
+}: { bindistTarballs, ncursesVersion }:
 
 # Prebuilt only does native
 assert stdenv.targetPlatform == stdenv.hostPlatform;
@@ -31,7 +31,7 @@ let
     let
       helper = stdenv.mkDerivation {
         name = "bindist-version";
-        src = bindistTarball;
+        src = bindistTarballs.${stdenv.targetPlatform.system};
         nativeBuildInputs = [ gcc perl ];
         postUnpack = ''
           patchShebangs ghc*/utils/
@@ -54,9 +54,10 @@ stdenv.mkDerivation rec {
 
   name = "ghc-${version}";
 
-  src = bindistTarball;
+  src = bindistTarballs.${stdenv.targetPlatform.system};
 
   nativeBuildInputs = [ perl ];
+  propagatedBuildInputs = [ stdenv.cc ];
   buildInputs = stdenv.lib.optionals (stdenv.targetPlatform.isAarch32 || stdenv.targetPlatform.isAarch64) [ llvm_39 ];
 
   # Cannot patchelf beforehand due to relative RPATHs that anticipate
@@ -174,5 +175,5 @@ stdenv.mkDerivation rec {
   };
 
   meta.license = stdenv.lib.licenses.bsd3;
-  meta.platforms = ["x86_64-linux" "i686-linux" "x86_64-darwin" "armv7l-linux" "aarch64-linux"];
+  meta.platforms = [ "x86_64-linux" "x86_64-darwin" ];
 }

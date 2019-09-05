@@ -39,6 +39,8 @@ let
           sed -i 's@utils/ghc-pwd/dist-install/build/tmp/ghc-pwd-bindist@pwd@g' ghc*/configure
         '';
         buildPhase = ''
+          # Run it twice since make might produce related output the first time.
+          make show VALUE=ProjectVersion
           make show VALUE=ProjectVersion > version
         '';
         installPhase = ''

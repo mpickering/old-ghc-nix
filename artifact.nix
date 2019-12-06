@@ -145,6 +145,9 @@ stdenv.mkDerivation rec {
         patchelf --set-rpath "${libPath}:$(patchelf --print-rpath $p)" $p
       fi
     done
+    for file in $(find "$out" -name settings); do
+      substituteInPlace $file --replace '("ranlib command", "")' '("ranlib command", "ranlib")'
+    done
   '' + stdenv.lib.optionalString stdenv.isDarwin ''
     # not enough room in the object files for the full path to libiconv :(
     for exe in $(find "$out" -type f -executable); do

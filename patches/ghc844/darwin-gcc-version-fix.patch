@@ -1,0 +1,11 @@
+--- a/configure
++++ b/configure
+@@ -6184,7 +6184,7 @@ else
+ 
+     # Be sure only to look at the first occurrence of the "version " string;
+     # Some Apple compilers emit multiple messages containing this string.
+-    fp_cv_gcc_version="`$CC -v 2>&1 | sed -n -e '1,/version /s/.*version [^0-9]*\([0-9.]*\).*/\1/p'`"
++    fp_cv_gcc_version="`$CC -v 2>&1 | sed -n -e '1,/version /s/.*version [^0-9]*\([0-9.]*\).*/\1/p' | head -n 1`"
+     fp_version1=$fp_cv_gcc_version; fp_version2=4.4
+ fp_save_IFS=$IFS; IFS='.'
+ while test x"$fp_version1" != x || test x"$fp_version2" != x

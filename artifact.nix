@@ -1,20 +1,44 @@
 { stdenv, lib, patchelfUnstable
-, perl, gcc, llvm_39
-, ncurses6, ncurses5, gmp, glibc, libiconv, elfutils
-}: { bindistTarballs, ncursesVersion, key, bindistVersion }:
+, perl, gcc, llvm_37 ? null, llvm_39 ? null, llvm_5 ? null, llvm_6 ? null
+, llvm_7 ? null, ncurses6, ncurses5, gmp, glibc, libiconv
+, numactl ? null, elfutils
+}: { bindistTarballs, ncursesVersion, hosts, key, bindistVersion }:
 
 # Prebuilt only does native
 assert stdenv.targetPlatform == stdenv.hostPlatform;
 
 let
+  host = hosts.${stdenv.targetPlatform.system};
+
   libPath = stdenv.lib.makeLibraryPath ([
     selectedNcurses gmp elfutils
-  ] ++ stdenv.lib.optional (stdenv.hostPlatform.isDarwin) libiconv);
+  ] ++ stdenv.lib.optional (stdenv.hostPlatform.isDarwin) libiconv
+    ++ stdenv.lib.optional (stdenv.targetPlatform.isLinux) numactl);
 
   selectedNcurses = {
     "5" = ncurses5;
     "6" = ncurses6;
-  }."${ncursesVersion}";
+  }."${host.ncursesVersion}";
+
+  # Better way to do this? Just put this in versions.json
+  selectedLLVM = {
+    "8.8.3" = llvm_7;
+    "8.8.2" = llvm_7;
+    "8.8.1" = llvm_7;
+    "8.6.5" = llvm_6;
+    "8.6.4" = llvm_6;
+    "8.6.3" = llvm_6;
+    "8.6.2" = llvm_6;
+    "8.6.1" = llvm_6;
+    "8.4.4" = llvm_5;
+    "8.4.3" = llvm_5;
+    "8.4.2" = llvm_5;
+    "8.4.1" = llvm_5;
+    "8.2.2" = llvm_39;
+    "8.2.1" = llvm_39;
+    "8.0.2" = llvm_37;
+    "8.0.1" = llvm_37;
+  }."${bindistVersion}";
 
   libEnvVar = stdenv.lib.optionalString stdenv.hostPlatform.isDarwin "DY"
     + "LD_LIBRARY_PATH";
@@ -65,9 +89,9 @@ stdenv.mkDerivation rec {
   src = bindistTarballs.${stdenv.targetPlatform.system};
 
   nativeBuildInputs = [ perl elfutils ];
-  propagatedBuildInputs = [ stdenv.cc ];
-  buildInputs = stdenv.lib.optionals (stdenv.targetPlatform.isAarch32 || stdenv.targetPlatform.isAarch64) [ llvm_39 elfutils ]
-                ++ [ gmp ];
+  propagatedBuildInputs = [ stdenv.cc ]
+  ++ stdenv.lib.optionals (stdenv.targetPlatform.isAarch32 || stdenv.targetPlatform.isAarch64) [ selectedLLVM elfutils ]
+  ++ stdenv.lib.optionals stdenv.targetPlatform.isLinux [ numactl ];
 
   # Cannot patchelf beforehand due to relative RPATHs that anticipate
   # the final install location/
@@ -119,8 +143,8 @@ stdenv.mkDerivation rec {
     # N.B. Use patchelfUnstable due to https://github.com/NixOS/patchelf/pull/85
     stdenv.lib.optionalString stdenv.isLinux ''
       find . -type f -perm -0100 -exec ${patchelfUnstable}/bin/patchelf \
-          --replace-needed libncurses${stdenv.lib.optionalString stdenv.is64bit "w"}.so.${ncursesVersion} libncurses.so \
-          --replace-needed libtinfo.so.${ncursesVersion} libncurses.so.${ncursesVersion} \
+          --replace-needed libncurses${stdenv.lib.optionalString stdenv.is64bit "w"}.so.${host.ncursesVersion} libncurses.so \
+          --replace-needed libtinfo.so.${host.ncursesVersion} libncurses.so.${host.ncursesVersion} \
           --interpreter ${glibcDynLinker} {} \;
 
       sed -i "s|/usr/bin/perl|perl\x00        |" ghc*/ghc/stage2/build/tmp/ghc-stage2
@@ -205,5 +229,5 @@ stdenv.mkDerivation rec {
   };
 
   meta.license = stdenv.lib.licenses.bsd3;
-  meta.platforms = [ "x86_64-linux" "x86_64-darwin" ];
+  meta.platforms = [ "x86_64-linux" "x86_64-darwin" "aarch64-linux" ];
 }

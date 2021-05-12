@@ -6,8 +6,6 @@ let mkGhc = key: v@{ncursesVersion ? "6", hosts, ...}:
         inherit ncursesVersion key hosts;
       };
     hashes = import ./hashes.nix;
-    mkTarball = { url, hash, ...}: pkgs.fetchurl { url = url;
-                                                       sha256 = hash;
-                                                     };
+    mkTarballs = plat: { src, ... }: pkgs.fetchurl src;
 in
   builtins.mapAttrs (key: v: mkGhc key v ) hashes // { inherit mkGhc; }

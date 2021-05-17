@@ -11,9 +11,9 @@ let
   host = hosts.${stdenv.targetPlatform.system};
 
   libPath = lib.makeLibraryPath ([
-    selectedNcurses gmp elfutils
+    selectedNcurses gmp
   ] ++ lib.optional (stdenv.hostPlatform.isDarwin) libiconv
-    ++ lib.optional (stdenv.targetPlatform.isLinux) numactl);
+    ++ lib.optionals (stdenv.targetPlatform.isLinux) [ numactl elfutils ]);
 
   ncursesVersion = host.ncursesVersion or "6";
 
@@ -58,7 +58,8 @@ let
       helper = stdenv.mkDerivation {
         name = "bindist-version";
         src = bindistTarballs.${stdenv.targetPlatform.system};
-        nativeBuildInputs = [ gcc perl elfutils ];
+        nativeBuildInputs = [ gcc perl ]
+          ++ lib.optional (stdenv.targetPlatform.isLinux) elfutils;
         postUnpack = ''
           patchShebangs ghc*/utils/
           patchShebangs ghc*/configure
@@ -90,7 +91,8 @@ stdenv.mkDerivation rec {
 
   src = bindistTarballs.${stdenv.targetPlatform.system};
 
-  nativeBuildInputs = [ perl elfutils ];
+  nativeBuildInputs = [ perl ]
+  ++ lib.optional (stdenv.targetPlatform.isLinux) elfutils;
   propagatedBuildInputs = [ stdenv.cc ]
   ++ lib.optionals (stdenv.targetPlatform.isAarch32 || stdenv.targetPlatform.isAarch64) [ selectedLLVM elfutils ]
   ++ lib.optionals stdenv.targetPlatform.isLinux [ numactl ];

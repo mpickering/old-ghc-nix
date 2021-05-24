@@ -198,7 +198,7 @@ stdenv.mkDerivation rec {
     done
   '';
 
-  postInstall = stdenv.lib.optionalString stdenv.isLinux ''
+  postInstall = lib.optionalString stdenv.isLinux ''
     # Fix dependencies on libtinfo in package registrations.
     for f in $(find "$out" -type f -iname '*.conf'); do
         echo "Fixing tinfo dependency in $f..."

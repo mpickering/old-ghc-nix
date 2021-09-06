@@ -11,6 +11,7 @@ for URL in ${concatStringsSep " " urls}; do
     NIXVER="ghc$(echo $VER | tr -d '.')"
     HOST=$(case ''${URL##*/} in
             *x86_64-apple-darwin*) echo "x86_64-darwin";;
+            *aarch64-apple-darwin*) echo "aarch64-darwin";;
             *x86_64-*linux*) echo "x86_64-linux";;
             *aarch64-*linux*) echo "aarch64-linux";;
            esac)

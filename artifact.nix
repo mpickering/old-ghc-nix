@@ -102,7 +102,8 @@ stdenv.mkDerivation rec {
   nativeBuildInputs = [ perl ]
   ++ lib.optional (stdenv.targetPlatform.isLinux) elfutils;
   propagatedBuildInputs = [ stdenv.cc ]
-  ++ lib.optionals (stdenv.targetPlatform.isAarch32 || stdenv.targetPlatform.isAarch64) [ selectedLLVM elfutils ]
+  ++ lib.optionals (stdenv.targetPlatform.isAarch32 || stdenv.targetPlatform.isAarch64) (
+     [ selectedLLVM ] ++ lib.optional stdenv.targetPlatform.isLinux elfutils)
   ++ lib.optionals stdenv.targetPlatform.isLinux [ numactl ];
 
   # Cannot patchelf beforehand due to relative RPATHs that anticipate
@@ -240,5 +241,5 @@ stdenv.mkDerivation rec {
   };
 
   meta.license = lib.licenses.bsd3;
-  meta.platforms = [ "x86_64-linux" "x86_64-darwin" "aarch64-linux" ];
+  meta.platforms = [ "x86_64-linux" "x86_64-darwin" "aarch64-linux" "aarch64-darwin" ];
 }

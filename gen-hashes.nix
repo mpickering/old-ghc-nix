@@ -2,7 +2,7 @@
 with builtins;
 let versions = fromJSON (readFile ./versions.json);
 in let urls = concatMap ({ version, bindists, ... }: map (bindist: "https://haskell.org/ghc/dist/${version}/ghc-${version}-${bindist}.tar.xz") bindists) versions;
-in with pkgs.stdenv.lib; pkgs.writeShellScriptBin "gen-hashes" ''
+in with pkgs.lib; pkgs.writeShellScriptBin "gen-hashes" ''
 export PATH="${getBin pkgs.coreutils}/bin:${getBin pkgs.nix}/bin:$PATH"
 echo "{"                                                                         > hashes.nix
 for URL in ${concatStringsSep " " urls}; do

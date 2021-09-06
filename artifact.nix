@@ -24,6 +24,14 @@ let
 
   # Better way to do this? Just put this in versions.json
   selectedLLVM = {
+    "8.10.7" = llvm_9;
+    "8.10.6" = llvm_9;
+    "8.10.5" = llvm_9;
+    "8.10.4" = llvm_9;
+    "8.10.3" = llvm_9;
+    "8.10.2" = llvm_9;
+    "8.10.1" = llvm_9;
+    "8.8.4" = llvm_7;
     "8.8.3" = llvm_7;
     "8.8.2" = llvm_7;
     "8.8.1" = llvm_7;

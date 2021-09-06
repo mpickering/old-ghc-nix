@@ -1,6 +1,6 @@
 { stdenv, lib, patchelfUnstable
 , perl, gcc, llvm_37 ? null, llvm_39 ? null, llvm_5 ? null, llvm_6 ? null
-, llvm_7 ? null, ncurses6, ncurses5, gmp, glibc, libiconv
+, llvm_7 ? null, llvm_9 ? null, ncurses6, ncurses5, gmp, glibc, libiconv
 , numactl ? null, elfutils
 }: { bindistTarballs, ncursesVersion, hosts, key, bindistVersion }:
 

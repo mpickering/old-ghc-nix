@@ -13,11 +13,12 @@ for URL in ${concatStringsSep " " urls}; do
             *x86_64-apple-darwin*) echo "x86_64-darwin";;
             *aarch64-apple-darwin*) echo "aarch64-darwin";;
             *x86_64-*linux*) echo "x86_64-linux";;
+            *i386*linux*)   echo "i686-linux";;
             *aarch64-*linux*) echo "aarch64-linux";;
            esac)
     NCURSES=$(case ''${URL##*/} in
                 *deb8*)     echo "5";;
-                *deb9*)     echo "5";;
+                *deb9*)     echo "6";;
                 *fedora27*) echo "6";;
               esac)
     echo "  \"$NIXVER\".hosts.$HOST.src = { url = \"$URL\"; sha256 = \"$SHA\"; };"     >> hashes.nix

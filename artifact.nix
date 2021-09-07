@@ -241,5 +241,5 @@ stdenv.mkDerivation rec {
   };
 
   meta.license = lib.licenses.bsd3;
-  meta.platforms = [ "x86_64-linux" "x86_64-darwin" "aarch64-linux" "aarch64-darwin" ];
+  meta.platforms = [ "i686-linux" "x86_64-linux" "x86_64-darwin" "aarch64-linux" "aarch64-darwin" ];
 }

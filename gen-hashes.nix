@@ -18,7 +18,7 @@ for URL in ${concatStringsSep " " urls}; do
            esac)
     NCURSES=$(case ''${URL##*/} in
                 *deb8*)     echo "5";;
-                *deb9*)     echo "6";;
+                *deb9*)     echo "5";;
                 *fedora27*) echo "6";;
               esac)
     echo "  \"$NIXVER\".hosts.$HOST.src = { url = \"$URL\"; sha256 = \"$SHA\"; };"     >> hashes.nix

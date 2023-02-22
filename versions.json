@@ -1,5 +1,17 @@
 [
-   { "version": "8.10.7", "bindists": ["x86_64-apple-darwin", "aarch64-apple-darwin", "x86_64-fedora27-linux", "i386-deb9-linux", "aarch64-deb10-linux"] }
+   { "version": "9.4.4", "bindists": ["x86_64-apple-darwin", "aarch64-apple-darwin", "x86_64-fedora27-linux", "i386-deb9-linux", "aarch64-deb10-linux"] }
+  ,{ "version": "9.4.3", "bindists": ["x86_64-apple-darwin", "aarch64-apple-darwin", "x86_64-fedora27-linux", "i386-deb9-linux", "aarch64-deb10-linux"] }
+  ,{ "version": "9.4.2", "bindists": ["x86_64-apple-darwin", "aarch64-apple-darwin", "x86_64-fedora27-linux", "i386-deb9-linux", "aarch64-deb10-linux"] }
+  ,{ "version": "9.4.1", "bindists": ["x86_64-apple-darwin", "aarch64-apple-darwin", "x86_64-fedora27-linux", "i386-deb9-linux", "aarch64-deb10-linux"] }
+  ,{ "version": "9.2.6", "bindists": ["x86_64-apple-darwin", "aarch64-apple-darwin", "x86_64-fedora27-linux", "i386-deb9-linux", "aarch64-deb10-linux"] }
+  ,{ "version": "9.2.5", "bindists": ["x86_64-apple-darwin", "aarch64-apple-darwin", "x86_64-fedora27-linux", "i386-deb9-linux", "aarch64-deb10-linux"] }
+  ,{ "version": "9.2.4", "bindists": ["x86_64-apple-darwin", "aarch64-apple-darwin", "x86_64-fedora27-linux", "i386-deb9-linux", "aarch64-deb10-linux"] }
+  ,{ "version": "9.2.3", "bindists": ["x86_64-apple-darwin", "aarch64-apple-darwin", "x86_64-fedora27-linux", "i386-deb9-linux", "aarch64-deb10-linux"] }
+  ,{ "version": "9.2.2", "bindists": ["x86_64-apple-darwin", "aarch64-apple-darwin", "x86_64-fedora27-linux", "i386-deb9-linux", "aarch64-deb10-linux"] }
+  ,{ "version": "9.2.1", "bindists": ["x86_64-apple-darwin", "aarch64-apple-darwin", "x86_64-fedora27-linux", "i386-deb9-linux", "aarch64-deb10-linux"] }
+  ,{ "version": "9.0.2", "bindists": ["x86_64-apple-darwin", "aarch64-apple-darwin", "x86_64-fedora27-linux", "i386-deb9-linux", "aarch64-deb10-linux"] }
+  ,{ "version": "9.0.1", "bindists": ["x86_64-apple-darwin", "aarch64-apple-darwin", "x86_64-fedora27-linux", "i386-deb9-linux", "aarch64-deb10-linux"] }
+  ,{ "version": "8.10.7", "bindists": ["x86_64-apple-darwin", "aarch64-apple-darwin", "x86_64-fedora27-linux", "i386-deb9-linux", "aarch64-deb10-linux"] }
   ,{ "version": "8.10.6", "bindists": ["x86_64-apple-darwin", "x86_64-fedora27-linux", "i386-deb9-linux", "aarch64-deb10-linux"] }
   ,{ "version": "8.10.5", "bindists": ["x86_64-apple-darwin", "x86_64-fedora27-linux", "i386-deb9-linux", "aarch64-deb10-linux"] }
   ,{ "version": "8.10.4", "bindists": ["x86_64-apple-darwin", "x86_64-fedora27-linux", "i386-deb9-linux", "aarch64-deb10-linux"] }

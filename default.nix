@@ -1,8 +1,11 @@
 { pkgs ? (import <nixpkgs> {}) }:
-let mkGhc = v@{ncursesVersion ? "6", ...}: pkgs.callPackage ./artifact.nix {} { bindistTarball = (mkTarball v); inherit ncursesVersion;};
-    hashes = builtins.fromJSON (builtins.readFile ./hashes.json);
-    mkTarball = { url, hash, ...}: pkgs.fetchurl { url = url;
-                                                       sha256 = hash;
-                                                     };
+let mkGhc = key: v@{ncursesVersion ? "6", hosts, ...}:
+      pkgs.callPackage ./artifact.nix {} {
+        bindistTarballs = builtins.mapAttrs mkTarballs hosts;
+        bindistVersion = v.bindistVersion or null;
+        inherit ncursesVersion key hosts;
+      };
+    hashes = import ./hashes.nix;
+    mkTarballs = plat: { src, ... }: pkgs.fetchurl src;
 in
-  builtins.mapAttrs (_: v: mkGhc v ) hashes // { inherit mkGhc; }
+  builtins.mapAttrs (key: v: mkGhc key v ) hashes // { inherit mkGhc; }
